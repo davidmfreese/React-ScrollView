@@ -28,5 +28,17 @@
     "mocha": "^2.1.0",
     "nodemon": "^1.2.1",
     "watchify": "~2.0.0"
-  }
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidmfreese/React-ScrollView.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidmfreese/React-ScrollView/issues"
+  },
+  "homepage": "https://github.com/davidmfreese/React-ScrollView"
 }
