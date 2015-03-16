@@ -6,7 +6,9 @@ var exports = {
         ScrollPositionType: require("./src/react/Enums/ScrollPositionType")
     },
     JSCoreGraphics: require("JSCoreGraphics"),
-    React: require("react")
+    React: require("react"),
+    //Not sure what to do with this for now but this is using different version that is causing react errors
+    "tcomb-react": require("./src/react/tcomb-react")
 };
 
 module.exports = exports;
