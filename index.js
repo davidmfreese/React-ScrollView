@@ -3,7 +3,8 @@ var exports = {
     ScrollViewDelegate: require('./src/react/ScrollView/ScrollViewDelegate'),
     Enums: {
         ScrollDirectionType: require("./src/react/Enums/ScrollDirectionType"),
-        ScrollPositionType: require("./src/react/Enums/ScrollPositionType")
+        ScrollPositionType: require("./src/react/Enums/ScrollPositionType"),
+        ScrollDirections: require("./src/react/Enums/ScrollDirections")
     },
     JSCoreGraphics: require("JSCoreGraphics"),
     React: require("react"),
