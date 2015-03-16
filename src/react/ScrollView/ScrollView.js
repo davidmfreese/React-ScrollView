@@ -13,7 +13,7 @@ var scrollViewProps = t.struct({
     content: t.Arr,
     frame: Geometry.DataTypes.Rect,
     contentSize: Geometry.DataTypes.Size,
-    scrollViewDelegate: t.maybe(t.Obj),
+    scrollViewDelegate: t.maybe(ScrollViewDelegate),
     scrollTimeout: t.Num,
     shouldUpdate: t.Bool,
     paging: t.Bool,
@@ -49,7 +49,7 @@ var ScrollView = React.createClass({
             console.log("isTypeSafe<-->ContentSize: " + Geometry.DataTypes.Size.is(this.props.contentSize));
         }
         if (this.props.scrollViewDelegate) {
-            console.log("isTypeSafe<-->CollectionViewDelegate: " + ScrollViewDelegate.Protocol.is(this.props.scrollViewDelegate));
+            console.log("isTypeSafe<-->ScrollViewDelegate: " + ScrollViewDelegate.is(this.props.scrollViewDelegate));
         }
 
         if (this.refs["scrollable"] == null || this.refs["scrollable"].getDOMNode() == null) {
