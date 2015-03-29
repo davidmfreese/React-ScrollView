@@ -21,7 +21,7 @@ var scrollViewProps = t.struct({
     debugScroll: t.maybe(t.Bool)
 }, "ScrollViewProps");
 
-var GestureRecognizerMixin = require("React-GestureRecognizer").GestureRecognizerMixin;
+var GestureRecognizerMixin = new require("React-GestureRecognizer").GestureRecognizerMixin();
 var PanGestureRecognizer = require("React-GestureRecognizer").Recognizers.PanGestureRecognizer;
 
 //enable touch events
