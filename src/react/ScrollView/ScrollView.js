@@ -249,11 +249,14 @@ var ScrollView = React.createClass({
                         that.handleScroll(currenctScrollPosition);
                     };
 
-                    var max = Math.abs(currentTop - newTop);
-                    if(Math.abs(currentLeft - newLeft) > max) {
-                        max = (currentLeft - newLeft);
+                    var animationTime = Math.abs(currentTop - newTop)/4;
+                    if(Math.abs(currentLeft - newLeft)/4 > animationTime) {
+                        animationTime = (currentLeft - newLeft)/4;
                     }
-                    var animation = new CAAnimation(Math.min(1000, max/4), AnimationEasingType.AnimationEaseLinear, stepFunction, function (success) {
+                    animationTime = Math.max(100, animationTime);//set minimum animation time to 100ms
+                    animationTime = Math.min(1000, animationTime); //set max animation time to 1000ms
+
+                    var animation = new CAAnimation(animationTime, AnimationEasingType.AnimationEaseLinear, stepFunction, function (success) {
                         if (that.props.scrollViewDelegate && that.props.scrollViewDelegate.scrollViewDidEndScrollingAnimation) {
                             that.props.scrollViewDelegate.scrollViewDidEndScrollingAnimation(this);
                         }
