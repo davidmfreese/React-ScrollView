@@ -157,15 +157,15 @@ var ScrollView = React.createClass({
             }
         }
         var scrollPosition = new Geometry.DataTypes.Point({x: scrollLeft, y: scrollTop});
-        if (this.props.scrollViewDelegate != null && this.props.scrollViewDelegate.scrollViewDidScroll != null) {
-            this.props.scrollViewDelegate.scrollViewDidScroll(scrollPosition);
-        }
         this.handleScroll(scrollPosition);
     },
     handleScroll: function (scrollPosition) {
         this.manageScrollTimeouts();
 
         var scrollDirections = this.getScrollDirection(scrollPosition);
+        if (this.props.scrollViewDelegate != null && this.props.scrollViewDelegate.scrollViewDidScroll != null) {
+            this.props.scrollViewDelegate.scrollViewDidScroll(scrollPosition);
+        }
         this.setState({
             scrollPosition: scrollPosition,
             scrollDirections: scrollDirections
@@ -237,12 +237,23 @@ var ScrollView = React.createClass({
                     var currentLeft = domElement.scrollLeft;
                     var newLeft = toScrollPosition.x;
 
+
                     var stepFunction = function (rate) {
-                        domElement.scrollTop = currentTop - rate * (currentTop - newTop);
-                        domElement.scrollLeft = currentLeft - rate * (currentLeft - newLeft);
+                        var currenctScrollPosition = new Geometry.DataTypes.Point({
+                            x: currentLeft - rate * (currentLeft - newLeft),
+                            y: currentTop - rate * (currentTop - newTop)
+                        });
+                        domElement.scrollTop = currenctScrollPosition.y;
+                        domElement.scrollLeft = currenctScrollPosition.x;
+
+                        that.handleScroll(currenctScrollPosition);
                     };
 
-                    var animation = new CAAnimation(200, AnimationEasingType.AnimationEaseLinear, stepFunction, function (success) {
+                    var max = Math.abs(currentTop - newTop);
+                    if(Math.abs(currentLeft - newLeft) > max) {
+                        max = (currentLeft - newLeft);
+                    }
+                    var animation = new CAAnimation(Math.min(1000, max/4), AnimationEasingType.AnimationEaseLinear, stepFunction, function (success) {
                         if (that.props.scrollViewDelegate && that.props.scrollViewDelegate.scrollViewDidEndScrollingAnimation) {
                             that.props.scrollViewDelegate.scrollViewDidEndScrollingAnimation(this);
                         }
