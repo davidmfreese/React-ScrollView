@@ -62,9 +62,19 @@ var ScrollView = React.createClass({
         if (this.props.paging) {
             this.shouldHandleTouchGestures = true;
         }
+        else {
+            this.shouldHandleTouchGestures = false;
+        }
         this.shouldHandleMouseGestures = true;
     },
     shouldComponentUpdate: function (nextProps, nextState) {
+        if (nextProps.paging && nextProps.shouldUpdate) {
+            this.shouldHandleTouchGestures = true;
+        }
+        else {
+            this.shouldHandleTouchGestures = false;
+        }
+
         var newScrollPosition = nextState.scrollPosition;
         var oldScrollPosition = this.state.scrollPosition;
         if (this.props.debugScroll) {
